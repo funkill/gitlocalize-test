@@ -2,6 +2,6 @@
 
 Ololo-trololo i'm an UFO driver
 
-Some text
+Some text. And new sentence. And another sentence.
 
 Another some text
