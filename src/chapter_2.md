@@ -2,4 +2,4 @@
 
 New chapter
 
-text with tpyo
+text with typo
