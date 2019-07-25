@@ -1,5 +1,0 @@
-[book]
-authors = ["funkill2"]
-multilingual = false
-src = "src"
-title = "Test book for checking gitlocalize tool"
