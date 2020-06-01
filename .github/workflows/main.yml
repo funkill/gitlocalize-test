@@ -1,0 +1,14 @@
+name: Checks
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+
+jobs:
+  gitlocalize-bug-checking:
+    name: Checking Gitlocalize bugs
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: funkill/bug-check-action@master
