@@ -11,4 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2.2.0
+      with:
+        depth: 0
     - uses: funkill/bug-check-action@master
