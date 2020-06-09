@@ -12,5 +12,5 @@ jobs:
     steps:
     - uses: actions/checkout@v2.2.0
       with:
-        depth: 0
+        fetch-depth: 200
     - uses: funkill/bug-check-action@master
