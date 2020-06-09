@@ -13,7 +13,7 @@ jobs:
     - uses: actions/checkout@v2.2.0
       with:
         fetch-depth: 200
-    - uses: funkill/bug-check-action@master
+    - uses: funkill/bug-check-action@tests
       with:
-        translation_dir: second-edition-ru/src
-        original_dir: second-edition/src
+        translation-dir: second-edition-ru/src
+        original-dir: second-edition/src
