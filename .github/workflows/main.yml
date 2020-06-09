@@ -15,5 +15,5 @@ jobs:
         fetch-depth: 200
     - uses: funkill/bug-check-action@master
       with:
-        translation-dir: second-edition-ru/src
-        original-dir: second-edition/src
+        translation_dir: second-edition-ru/src
+        original_dir: second-edition/src
