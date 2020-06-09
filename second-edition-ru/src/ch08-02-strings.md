@@ -26,11 +26,7 @@ let mut s = String::new();
 
 ```rust
 let data = "initial contents";
-
-let s = data.to_string();
-
-// the method also works on a literal directly:
-let s = "initial contents".to_string();
+let s = data.to_string();  // the method also works on a literal directly: let s = "initial contents".to_string();
 ```
 
 Так как строки используются для различных целей, например, интенсивно применяются в различных API. Некоторый из опций строк кажутся избыточными, но весьма удобны. Некоторые функции имеют одинаковые действия, хотя имеют различные свойства. Например, `String::from` и `.to_string`. Выбор использованной функции, порой, зависит от стиля программирования.
@@ -46,17 +42,7 @@ let s = String::from("initial contents");
 Мы можем добавить данные с помощью метода `push_str`:
 
 ```rust
-let hello = "السلام عليكم";
-let hello = "Dobrý den";
-let hello = "Hello";
-let hello = "שָׁלוֹם";
-let hello = "नमस्ते";
-let hello = "こんにちは";
-let hello = "안녕하세요";
-let hello = "你好";
-let hello = "Olá";
-let hello = "Здравствуйте";
-let hello = "Hola";
+let hello = "السلام عليكم"; let hello = "Dobrý den"; let hello = "Hello"; let hello = "שָׁלוֹם"; let hello = "नमस्ते"; let hello = "こんにちは"; let hello = "안녕하세요"; let hello = "你好"; let hello = "Olá"; let hello = "Здравствуйте"; let hello = "Hola";
 ```
 
 ### Обновление строковых данных
@@ -68,33 +54,19 @@ let hello = "Hola";
 Метод `push_str` получает срез в качестве параметра, т.к. для использования данного типа данных владение не нужно. К примеру, было бы очень жаль, если бы вы не имели бы возможности использовать данные переменной `s2` после добавления её содержания в переменную `s1`:
 
 ```rust
-fn main() {
-    let mut s = String::from("foo");
-    s.push_str("bar");
-    println!("{}", s);
-}
-
+fn main() {     let mut s = String::from("foo");     s.push_str("bar");     println!("{}", s); }
 ```
 
 Метод `push` имеет в качестве параметра символьную переменную и добавляет её в массив символов строки `String`:
 
 ```rust
-fn main() {
-    let mut s1 = String::from("foo");
-    let s2 = String::from("bar");
-    s1.push_str(&s2);
-    println!("{}", s1);
-    println!("{}", s2);
-    println!("{}", s2);
-}
-
+fn main() {     let mut s1 = String::from("foo");     let s2 = String::from("bar");     s1.push_str(&s2);     println!("{}", s1);     println!("{}", s2);     println!("{}", s2); }
 ```
 
 После этого, переменная `s` будет содержать “lol”.
 
 ```rust
-let mut s = String::from("lo");
-s.push('l');
+let mut s = String::from("lo"); s.push('l');
 ```
 
 Весьма часто приходится объединять строки. Один из возможных способов - использование оператора `+`:
@@ -104,13 +76,7 @@ s.push('l');
 Результат - вывод строки `Hello, world!`. Причина такой вот жёсткой конструкции оператора объединения - использование метода `add`:
 
 ```rust
-fn main() {
-    let s1 = String::from("Hello, ");
-    let s2 = String::from("world!");
-    let s3 = s1 + &s2; // Note that s1 has been moved here and can no longer be used
-    println!("{}", s3);
-}
-
+fn main() {     let s1 = String::from("Hello, ");     let s2 = String::from("world!");     let s3 = s1 + &s2; // Note that s1 has been moved here and can no longer be used     println!("{}", s3); }
 ```
 
 Это не точное определение метода `add` стандартной библиотеки. Этот метод использует обобщения (т.н. дженерики). К `String` мы можем добавлять только `&str`. Также метод `add` использует получение данных по ссылке так что если даже второй параметр имеет тип `String` всё равно он преобразуется в `str`.
@@ -128,29 +94,13 @@ fn add(self, s: &str) -> String {
 Такое решение более предпочтительно, т.к. в последующих строках все переменые можно использовать.
 
 ```rust
-fn main() {
-    let s1 = String::from("tic");
-    let s2 = String::from("tac");
-    let s3 = String::from("toe");
-
-    let s = s1 + "-" + &s2 + "-" + &s3;
-    println!("{}", s);
-}
-
+fn main() {     let s1 = String::from("tic");     let s2 = String::from("tac");     let s3 = String::from("toe");      let s = s1 + "-" + &s2 + "-" + &s3;     println!("{}", s); }
 ```
 
 Во многих языках программирования для получения символа из строки достаточна сослаться на него по индексу. В Rust это приведёт к ошибке:
 
 ```rust
-fn main() {
-    let s1 = String::from("tic");
-    let s2 = String::from("tac");
-    let s3 = String::from("toe");
-
-    let s = format!("{}-{}-{}", s1, s2, s3);
-    println!("{}", s);
-}
-
+fn main() {     let s1 = String::from("tic");     let s2 = String::from("tac");     let s3 = String::from("toe");      let s = format!("{}-{}-{}", s1, s2, s3);     println!("{}", s); }
 ```
 
 Описание ошибки:
@@ -160,24 +110,13 @@ fn main() {
 Глубинная причина не реализованности этой опции в системе хранения строк в памяти.
 
 ```rust,ignore
-fn main() {
-    let s1 = String::from("hello");
-    let h = s1[0];
-    println!("{}", h);
-}
-
+fn main() {     let s1 = String::from("hello");     let h = s1[0];     println!("{}", h); }
 ```
 
 Тип `String` это объертка `Vec<u8>`. Прежде всего, рассмотрим пример:
 
 ```text
-error[E0277]: the trait bound `std::string::String: std::ops::Index<{integer}>` is not satisfied
- -->
-  |
-3 |     let h = s1[0];
-  |             ^^^^^ the type `std::string::String` cannot be indexed by `{integer}`
-  |
-  = help: the trait `std::ops::Index<{integer}>` is not implemented for `std::string::String`
+error[E0277]: the trait bound `std::string::String: std::ops::Index<{integer}>` is not satisfied  -->   | 3 |     let h = s1[0];   |             ^^^^^ the type `std::string::String` cannot be indexed by `{integer}`   |   = help: the trait `std::ops::Index<{integer}>` is not implemented for `std::string::String`
 ```
 
 `len` содержит 4. Это значит, что вектор `Vec` содержит строку “Hola” состоящую из 4 байт. Рассмотрим другой пример:
@@ -187,21 +126,13 @@ error[E0277]: the trait bound `std::string::String: std::ops::Index<{integer}>` 
 В данном случает `len` содержит 24. Каждый символ закодирован двумя байтами.
 
 ```rust
-fn main() {
-    let len = String::from("Hola").len();
-    println!("{}", len);
-}
-
+fn main() {     let len = String::from("Hola").len();     println!("{}", len); }
 ```
 
 В качестве примера, рассмотрите этот некорректный Rust код:
 
 ```rust
-fn main() {
-    let len = String::from("Здравствуйте").len();
-    println!("{}", len);
-}
-
+fn main() {     let len = String::from("Здравствуйте").len();     println!("{}", len); }
 ```
 
 Этот код также не скомпилируется.
@@ -209,8 +140,7 @@ fn main() {
 В Rust можно оперировать UTF-8 данными тремя способами: байтами, скалярными значениями и графемными кластерами (наиболее близкое к понятию символов).
 
 ```rust,ignore
-let hello = "Здравствуйте";
-let answer = &hello[0];
+let hello = "Здравствуйте"; let answer = &hello[0];
 ```
 
 Если мы посмотрим на слова в хинди “नमस्ते”, в векторном виде (в виде байт) оно будет выглядеть следующим образом:
@@ -222,8 +152,7 @@ let answer = &hello[0];
 Это 6 симвлов `char`, но 4 и 6 - это не символы, это диакртики (вспомогательные символы). И наконец, посмотрим на графемные кластеры:
 
 ```text
-[224, 164, 168, 224, 164, 174, 224, 164, 184, 224, 165, 141, 224, 164, 164,
-224, 165, 135]
+[224, 164, 168, 224, 164, 174, 224, 164, 184, 224, 165, 141, 224, 164, 164, 224, 165, 135]
 ```
 
 Вам решать, какой способ представления строковых данных Вам удобно для решения задачи.
@@ -248,7 +177,6 @@ let answer = &hello[0];
 
 ```rust
 let hello = "Здравствуйте";
-
 let s = &hello[0..4];
 ```
 
@@ -257,8 +185,7 @@ let s = &hello[0..4];
 Сейчас поговорим о предпочтительных способах доступа к элементам строки.
 
 ```text
-thread 'main' panicked at 'index 0 and/or 1 in `Здравствуйте` do not lie on
-character boundary', ../src/libcore/str/mod.rs:1694
+thread 'main' panicked at 'index 0 and/or 1 in `Здравствуйте` do not lie on character boundary', ../src/libcore/str/mod.rs:1694
 ```
 
 Если Вам необходимо производить операции над юникод-элементами строки, наилучший способ - использовать метод `chars`. Вызов `chars` из “नमस्ते” разделяет и возвращает 6 значений типа `char`. Далее, вы можете производить итерации для получения элементов этой строки:
@@ -270,43 +197,25 @@ character boundary', ../src/libcore/str/mod.rs:1694
 Метод `bytes` возвращает очередной байт при каждой итерации:
 
 ```rust
-fn main() {
-    for c in "नमस्ते".chars() {
-        println!("{}", c);
-    }
-}
-
+fn main() {     for c in "नमस्ते".chars() {         println!("{}", c);     } }
 ```
 
 Этот код напечатает 18 байт, из которых состоит данные строки:
 
 ```text
-न
-म
-स
-्
-त
-े
+न म स ् त े
 ```
 
 Работая с байтами, пожалуйста, учитывайте тот факт, что значение одного символа может состоять из более одного байта.
 
 ```rust
-fn main() {
-    for b in "नमस्ते".bytes() {
-        println!("{}", b);
-    }
-}
+fn main() {     for b in "नमस्ते".bytes() {         println!("{}", b);     } }
 ```
 
 Получение графемных кластеров из строки весьма сложное дело, поэтому этот функционал не входит в стандартную библиотеку. Но существуют дополнительные библиотеки, которые решают эту задачу.
 
 ```text
-224
-164
-168
-224
-// ... etc
+224 164 168 224 // ... etc
 ```
 
 Это, действительно, сложно. Каждый язык программирования старается найти своё решение трудной задачи обработки, работы со строками. Методология Rust призвана сократить ошибки, поэтому функционал работы со строками реализован подобным образом.
